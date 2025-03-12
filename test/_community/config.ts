@@ -1,4 +1,6 @@
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { postgresAdapter } from '@payloadcms/db-postgres'
+
 import { fileURLToPath } from 'node:url'
 import path from 'path'
 
@@ -24,6 +26,19 @@ export default buildConfigWithDefaults({
     // ...add more globals here
     MenuGlobal,
   ],
+  localization: {
+    locales: [
+      {
+        code: 'da',
+        label: 'Danish',
+      },
+      {
+        code: 'en',
+        label: 'English',
+      },
+    ],
+    defaultLocale: 'da',
+  },
   onInit: async (payload) => {
     await payload.create({
       collection: 'users',
@@ -40,6 +55,12 @@ export default buildConfigWithDefaults({
       },
     })
   },
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.POSTGRES_URL || '',
+    },
+  }),
+
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

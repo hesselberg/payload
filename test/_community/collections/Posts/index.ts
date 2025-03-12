@@ -15,6 +15,29 @@ export const PostsCollection: CollectionConfig = {
       type: 'text',
     },
     {
+      type: 'tabs',
+      tabs: [
+        {
+          name: 'hero',
+          label: 'Hero',
+          interfaceName: 'hero',
+          localized: true,
+          fields: [
+            {
+              type: 'group',
+              name: 'group',
+              fields: [
+                {
+                  name: 'heading',
+                  type: 'text',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'content',
       type: 'richText',
       editor: lexicalEditor({
